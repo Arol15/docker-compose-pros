@@ -1,0 +1,19 @@
+version: "3"
+services:
+  drupal:
+    build: .
+    image: lrusinou/custom-drupal
+    ports:
+      - 8080:80
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - drupal-data:/var/lib/postgresql/data
+
+volumes:
+  drupal-data:
